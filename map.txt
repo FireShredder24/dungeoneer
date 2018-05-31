@@ -1,0 +1,21 @@
+20 20 Hamville 1200 Livestock
+10 18 Candleburg 1400 Agriculture
+9 14 Haultown 900 Seafood
+15 6 Hamfast 1500 Seafood
+29 3 Fenburg 800 Seafood
+33 6 Ashton 550 Fertilizer
+29 11 Rular 1600 Agriculture
+18 12 Spearthrust 950 Weapons
+24 29 Barnville 1000 Agriculture
+8 33 Tallowton Candles
+11 36 Starville Crafts
+10 39 Evensburg Crafts
+22 35 Lambburg Agriculture
+21 40 Elventrade Crafts
+32 39 Ironforge Weapons
+40 39 Wharfton Seafood
+44 41 Fisherdock Seafood
+44 34 Hammerton Seafood
+37 33 Hammertown Weapons
+40 21 Trident Seafood
+24 14 Silvanville Crafts

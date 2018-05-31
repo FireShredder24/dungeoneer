@@ -1,0 +1,311 @@
+oppLvl = 1
+playerLvl = 1
+bossLvl = 3
+oppHP = oppLvl * 8
+DC = 12
+set["elem1"]["1"] = "A lonely cliff stands surrounded by "
+set["elem1"]["2"] = "Salt flats bordered by "
+set["elem1"]["3"] = "Extensive mesas filled with "
+set["elem1"]["4"] = "A roaring river sits surrounded by "
+set["elem1"]["5"] = "A clearing is surrounded by "
+set["elem2"]["1"] = "dark forests and "
+set["elem2"]["2"] = "fields of golden grass and "
+set["elem2"]["3"] = "stark hoodoos of red rock and "
+set["elem2"]["4"] = "meadows clogged with reeds and "
+set["elem2"]["5"] = "dank swampland and "
+set["elem3"]["1"] = "rocky ground."
+set["elem3"]["2"] = "stunted trees."
+set["elem3"]["3"] = "trickling streams."
+set["elem3"]["4"] = "cattails."
+set["elem3"]["5"] = "tall trees."
+TextWindow.WriteLine("Welcome to Dungeoneer!")
+TextWindow.WriteLine("You are an adventurer embarking on a daring mission to...")
+init = Math.GetRandomNumber(5)
+Program.Delay(1000)
+If init = 1 Then
+  TextWindow.WriteLine("save a kidnapped girl!")
+ElseIf init = 2 Then
+  TextWindow.WriteLine("recover lost treasure!")
+ElseIf init = 3 Then
+  TextWindow.WriteLine("redeem yourself in society!")
+ElseIf init = 4 Then
+  TextWindow.WriteLine("stop a heathen horde from destroying your village!")
+ElseIf init = 5 Then
+  TextWindow.WriteLine("loot dungeons and overall be an idiot!")
+EndIf
+Program.Delay(1000)
+TextWindow.WriteLine("Which class will your character be?")
+TextWindow.WriteLine("Supported classes: fighter, hunter, mage, cleric")
+cla = TextWindow.Read()
+If cla = "fighter" Then
+  str = 15
+  con = 14
+  dex = 12
+  int = 13
+  wis = 11
+  cha = 14
+  damDie["mel"] = 10
+  damDie["ran"] = 8
+  damDie["imp"] = 6
+  damDie["mag"] = 4
+  HP = 12
+ElseIf cla = "hunter" Then
+  str = 13
+  con = 13
+  dex = 15
+  int = 13
+  wis = 11
+  cha = 9
+  damDie["mel"] = 8
+  damDie["ran"] = 10
+  damDie["imp"] = 6
+  damDie["mag"] = 4
+  HP = 10
+ElseIf cla = "mage" Then
+  str = 10
+  con = 10
+  dex = 12
+  int = 15
+  wis = 14
+  cha = 13
+  damDie["mel"] = 6
+  damDie["ran"] = 8
+  damDie["imp"] = 4
+  damDie["mag"] = 10
+  HP = 8
+ElseIf cla = "cleric" Then
+  str = 13
+  con = 12
+  dex = 11
+  int = 15
+  wis = 12
+  cha = 15
+  damDie["mel"] = 8
+  damDie["ran"] = 8
+  damDie["imp"] = 6
+  damDie["mag"] = 10
+  HP = 11
+EndIf
+damDie["thres"]["mel"] = damDie["mel"] / 2 - 1
+damDie["thres"]["ran"] = damDie["mel"] / 2 - 1
+damDie["thres"]["imp"] = damDie["mel"] / 2 - 1
+damDie["thres"]["mag"] = damDie["mel"] / 2 - 1
+move()
+Sub move
+  set = Math.GetRandomNumber(5)
+  If init = 4 Then
+    TextWindow.WriteLine("You stay in your village, commanding your neighbors and raising a militia.")
+  Else
+    If set = 1 Then
+      inTown = "true"
+      TextWindow.WriteLine("Trudging alone through a seemingly impassable wilderness, you spend five days in transit to a dwarven hillocks.")
+    ElseIf set = 2 Then
+      TextWindow.WriteLine("Riding fast over golden fields, you reach a human hamlet within two days.")
+      inTown = "true"
+    ElseIf set = 3 Then
+      TextWindow.WriteLine("On a brisk march over a dank swampland, you reach an elven forest retreat within three days.")
+      inTown = "true"
+    ElseIf set = 4 Then
+      TextWindow.WriteLine("You stay in your village after someone you care about persuades you to stay.")
+      inTown = "true"
+    ElseIf set = 5 Then
+      inTown = "true"
+      TextWindow.WriteLine("You stall in your village, staying at a favorite inn.")
+    EndIf
+  EndIf
+  act()
+EndSub
+Sub actRoll
+  If inTown = "true" Then
+    actTown()
+  Else
+    act()
+  EndIf
+EndSub
+Sub attMelee
+  damage = Math.GetRandomNumber(damDie["mel"])
+  damAdj = damage - damDie["mel"] / 2 + (str - 8)
+  If damage > damDie["thres"]["mel"] Then
+    TextWindow.Write("You dealt " + damAdj + " damage to your target, ")
+    If damAdj >= oppHP Then
+      TextWindow.Write("killing it. ")
+      actRoll()
+    ElseIf damAdj < oppLvl * 8 Then
+      TextWindow.WriteLine("causing damage but not killing it. ")
+      damOpp()
+      act()
+    EndIf
+  Else
+    TextWindow.WriteLine("You failed to deal damage to your target.")
+    act()
+  EndIf
+EndSub
+Sub attRanged
+  damage = Math.GetRandomNumber(damDie["ran"])
+  damAdj = damage - damDie["ran"] / 2 + (dex - 8)
+  If damage > damDie["thres"]["ran"] Then
+    TextWindow.Write("You dealt " + damAdj + " damage to your target, ")
+    If damAdj >= oppHP Then
+      TextWindow.WriteLine("killing it. ")
+      actRoll()
+    ElseIf damAdj < oppHP Then
+      TextWindow.WriteLine("causing damage but not killing it. ")
+      damOpp()
+      act()
+    EndIf
+  ElseIf stick[1] < 4 Then
+    TextWindow.WriteLine("You failed to deal damage to your target.  You attempt to shoot at the creature again.")
+    stick[1] = stick[1] + 1
+    attRanged()
+  Else
+    stick[1] = 0
+    act()
+  EndIf
+EndSub
+Sub attMagic
+  damage = Math.GetRandomNumber(damDie["mag"])
+  damAdj = damage - damDie["mag"] / 2 + (int - 12)
+  If damage > damDie["thres"]["mag"] Then
+    TextWindow.Write("You dealt " + damAdj + " damage to your target, ")
+    If damAdj >= oppHP Then
+      TextWindow.WriteLine("killing it. ")
+      actRoll()
+    ElseIf damAdj < oppHP Then
+      TextWindow.Write("causing damage but not killing it. ")
+      damOpp()
+      act()
+    EndIf
+  Else
+    TextWindow.WriteLine("You failed to deal damage to your target.")
+    act()
+  EndIf
+EndSub
+Sub attImprov
+  damage = Math.GetRandomNumber(damDie["imp"])
+  damAdj = damage - damDie["imp"] / 2 + (str - 12)
+  If damage > damDie["thres"]["imp"] Then
+    TextWindow.Write("You dealt " + damAdj + " damage to your target, ")
+    If damAdj >= oppHP Then
+      TextWindow.WriteLine("killing it. ")
+      actRoll()
+    ElseIf damAdj < oppHP Then
+      TextWindow.WriteLine("causing damage but not killing it. ")
+      damOpp()
+      act()
+    EndIf
+  ElseIf stick[1] < 2 Then
+    TextWindow.WriteLine("You failed to deal damage to your target.  You take another swing with your improvised weapon.")
+    stick[1] = stick[1] + 1
+    attImprov()
+  Else
+    act()
+  EndIf
+EndSub
+Sub damOpp
+  If oppHP = oppLvl * 8 Then
+    oppHP = oppLvl * 8 - damAdj
+  Else
+    oppHP = oppHP - damAdj
+  EndIf
+  If oppHP < 1 Then
+    TextWindow.WriteLine("You successfully killed your target.")
+  EndIf
+EndSub
+Sub act
+  TextWindow.WriteLine("What would you like to do?")
+  act = TextWindow.Read()
+  If act = "attack" Or act = "1" Then
+    TextWindow.WriteLine("Which weapon? (1 is melee, 2 is ranged, 3 is improvised, 4 is magic)")
+    wep = TextWindow.Read()
+    If wep = "1" Then
+      attMelee()
+    ElseIf wep = "2" Then
+      attRanged()
+    ElseIf wep = "3" Then
+      attImprov()
+    ElseIf wep = "4" Then
+      attMagic()
+    EndIf
+  EndIf
+  If act = "stay a while" Or "2" Then
+    If Math.GetRandomNumber(10) <= 3 Then
+      TextWindow.WriteLine("You fail to find lodgings for the night, and are forced to move on.")
+      move()
+    Else
+      TextWindow.WriteLine("You successfully find lodging for the next " + Math.GetRandomNumber(3) + " days.")
+      actTown()
+    EndIf
+  EndIf
+  If act = "move" Or act = "move on" Or act = "3" Then
+    move()
+    act()
+  EndIf
+  If act = "camp" Or act = "make camp" Or act = "4" Then
+    If Math.GetRandomNumber(10) >= 6 Then
+      TextWindow.WriteLine("You assemble a lean-to from several small trees and spend the night uneventfully.")
+      act()
+    Else
+      If Math.GetRandomNumber(10) >= 2 Then
+        TextWindow.WriteLine("There is no suitable shelter.")
+        act()
+      Else
+        TextWindow.WriteLine("You assemble a lean-to from several small trees.")
+        Program.Delay(1000)
+        TextWindow.WriteLine("A noise wakes you in your sleep.  You go outside your lean-to and stand face-to-face with a ferocius wild animal.")
+        act()
+      EndIf
+    EndIf
+  EndIf
+  If act = "forage" Or act = "5" Then
+    If wis + 2 >= DC Then
+      TextWindow.WriteLine("You collect herbs and wild roots to eat from the immediate area.")
+      act()
+    Else
+      TextWindow.WriteLine("You fail to find food in the wilderness.")
+      act()
+    EndIf
+  EndIf
+  If act = "scan" Or act = "6" Or act = "scan surroundings" Then
+    TextWindow.WriteLine(set["elem1"]["1"] + set["elem2"]["3"] + set["elem3"]["4"])
+    act()
+  EndIf
+EndSub
+Sub actTown
+  TextWindow.WriteLine("What would you like to do in town?")
+  act = TextWindow.Read()
+  If act = "buy goods" Or "1" Then
+    If Math.GetRandomNumber(10) <= 3 Then
+      TextWindow.WriteLine("You fail to buy goods.")
+      actTown()
+    Else
+      TextWindow.WriteLine("You successfully buy goods from merchants, gaining food and repairing your armor & weapons.  You also refill your ammunition(if you carry a ranged weapon).")
+      actTown()
+    EndIf
+  EndIf
+  If act = "steal something" Or "2" Then
+    If Math.GetRandomNumber(dex) <= dex / 2 Then
+      TextWindow.WriteLine("You fail to steal something and get kicked out of town.")
+      act()
+    Else
+      TextWindow.WriteLine("You succeed in stealing some food and small coins.  Be careful, as on your next actions in this town there is a chance that you will be caught.")
+      actTown()
+    EndIf
+  EndIf
+  If act = "leave town" Or "3" Or "leave" Then
+    inTown = "false"
+    act()
+  EndIf
+  If act = "sleep" Or "4" Then
+    If Math.GetRandomNumber(10) >= 21 Then
+      TextWindow.WriteLine("You spend the night uneventfully.")
+      actTown()
+    Else
+      TextWindow.WriteLine("A noise wakes you in your sleep.  A robber is almost done hacking down the door to your bedroom with an axe.")
+      act()
+    EndIf
+  EndIf
+EndSub
+'Sub mnstrAtk
+'  If Math.GetRandomNumber(5) = 1 Then
+'    damage = oppLvl * 7
+'    HP = HP - Math.GetRandomNumber(damage)

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="CoffeeCup HTML Editor (www.coffeecup.com)">
+    <meta name="dcterms.created" content="Mon, 14 May 2018 23:24:09 GMT">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>DungeonDocs - C++ Page</title>
+    
+	<style type="text/css">
+    <!--
+    body {
+      color:#000000;
+      background-color:#CACACA;
+      <!--background-image:url('Background Image');>
+      background-repeat:no-repeat;
+	  font-family: Nirmala UI, Nirmala UI, Sans Serif;
+	  padding-left: 4%;
+	  padding-right: 4%;
+	  padding-top: 1%;
+	  padding-bottom: 5%;
+    }
+    a  { color:#0000FF; }
+    a:visited { color:#800080; }
+    a:hover { color:#008000; }
+    a:active { color:#FF0000; }
+	-->
+    </style>
+    <!--[if IE]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  <p style=" font-size: 36pt; "><b>C++ Edition Documentation</b></p>
+  <hr noshade color="#ABABAB" />
+  <p style=" text-indent: 4%; ">Dungeoneer is a game that incorporates many aspects of Dungeons & Dragons, the indomitable role-playing game from the 1980's, so knowing how to play D&D should help you understand Dungeoneer.  The official D&D website is <u>dnd.wizards.com</u>, where detailed and authoritative information on the RPG can be found.  This version of the documentation is valid for Dungeoneer version Beta 1.0.7.</p>
+  <p style=" font-size: 18pt; "><b>File & Licensing Information:</b></p>
+  <hr noshade color="#ABABAB" />
+  <p style=" text-indent: 4%; ">- "utils.h" is a required file for compiling Dungeoneer in a C++ IDE.</p>
+  <p style=" text-indent: 4%; ">- "dungeoneer_sb.exe" is the SmallBasic version executable.  SmallBasic is a stripped-down version of Basic created by Microsoft to teach students about coding and to get them interested in learning Microsoft's Visual Basic.</p>
+  <p style=" text-indent: 4%; ">- "dungeoneer_sb.sb" is the SmallBasic version source code.  Feel free to redistribute and modify it; it is for a deprecated and discontinued version of Dungoneer.</p>
+  <p style=" text-indent: 4%; ">- "dungeoneer.cpp" is the C++ version source code.  Check "README.txt" for the licensing information on this file.</p>
+  <p style=" text-indent: 4%; ">- "dungeoneer.exe" is the C++ version executable.  Check "README.txt" for the licensing information on this file.</p>
+  <p style=" text-indent: 4%; ">- Dungeoneer is covered by a slightly modified version of the MIT License which adds the condition that modified versions of Dungoneer not be shared as unmodified/official versions.</p>
+  <p style=" text-indent: 4%; ">- Dungeoneer source code files are heavily commented to help beginner programmers learn how to code.</p>
+  <p style=" font-size: 18pt; "><b>Known Bugs</b>
+  <hr noshade color="#ABABAB" />
+  <p style=" text-indent: 4%; ">None, at the moment.</p>
+  <p style=" font-size: 18pt; "><b>General Play Information & Data Tables</b></p>
+  <hr noshade color="#ABABAB" />
+  <p style=" text-indent: 4%; ">Dungeoneer is a text adventure at heart; a game designed from the ground up to be straightforward and, above all, <a href="fun.html"><b>fun</b></a>!  The actions that you as a player can take are determined by your situation: for example, you cannot take a long rest in the middle of combat.  Here is a table of the options for the various menus.</p>
+  
+<div style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table width="60%" border="1" cellpadding="2" cellspacing="2" style="border-color: #000000; border-style: solid; background-color: #DDDDDD;">
+<tr valign="top">
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: bold; color: #000000; background-color: transparent; text-decoration: none;">Input String</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: bold; color: #000000; background-color: transparent; text-decoration: none;">Combat Requirement</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: bold; color: #000000; background-color: transparent; text-decoration: none;">Numerical Shortcut</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">attack</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">both</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">1</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">move</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">out of combat</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">2</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="15" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">longrest</span></p>
+</td>
+<td height="15" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">out of combat</span></p>
+</td>
+<td height="15" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">3</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">shortrest</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">out of combat</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">4</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">scan</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">both</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">6</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td colspan=3 style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: bold; color: #000000; background-color: transparent; text-decoration: none;">Combat Menu</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">attack</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">both</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">1</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">dodge</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">in combat</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">2</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">disengage</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">in combat</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">3</span></p>
+</td>
+</tr>
+</table>
+</div>
+	  <p style=" font-size: 18pt; "><b>Class Information</b></p>
+	  <hr noshade color="#ABABAB" />
+	  <p style=" text-indent: 4%; ">Dungeoneer has the same four base classes as D&D: fighter, rogue, wizard and cleric.  (Selecting your own ability scores & equipment is a planned feature)</p>
+<div style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table width="100%" border="2" cellpadding="2" cellspacing="2" style="border-color: #000000; border-style: solid; background-color: #DDDDDD;">
+<tr valign="top">
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: bold; color: #000000; background-color: transparent; text-decoration: none;">Class Name</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: bold; color: #000000; background-color: transparent; text-decoration: none;">Strength</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: bold; color: #000000; background-color: transparent; text-decoration: none;">Dexterity</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: bold; color: #000000; background-color: transparent; text-decoration: none;">Constitution</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: bold; color: #000000; background-color: transparent; text-decoration: none;">Intelligence</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: bold; color: #000000; background-color: transparent; text-decoration: none;">Wisdom</span></p>
+</td>
+<td style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: bold; color: #000000; background-color: transparent; text-decoration: none;">Charisma</span></p>
+</td>
+<td width="68" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: bold; color: #000000; background-color: transparent; text-decoration: none;">Slot 1</span></p>
+</td>
+<td width="65" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: bold; color: #000000; background-color: transparent; text-decoration: none;">Slot 2</span></p>
+</td>
+<td width="122" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: bold; color: #000000; background-color: transparent; text-decoration: none;">Slot 3</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="41" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">Fighter</span></p>
+</td>
+<td height="41" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">15</span></p>
+</td>
+<td height="41" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">14</span></p>
+</td>
+<td height="41" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">14</span></p>
+</td>
+<td height="41" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">11</span></p>
+</td>
+<td height="41" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">12</span></p>
+</td>
+<td height="41" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">10</span></p>
+</td>
+<td width="68" height="41" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">Longsword(1d8)</span></p>
+</td>
+<td width="65" height="41" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">Dagger(1d4)</span></p>
+</td>
+<td width="122" height="41" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">Light Crossbow(1d8)</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="32" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">Rogue</span></p>
+</td>
+<td height="32" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">14</span></p>
+</td>
+<td height="32" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">15</span></p>
+</td>
+<td height="32" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">13</span></p>
+</td>
+<td height="32" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">11</span></p>
+</td>
+<td height="32" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">14</span></p>
+</td>
+<td height="32" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">8</span></p>
+</td>
+<td width="68" height="32" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">Shortsword(1d6)</span></p>
+</td>
+<td width="65" height="32" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">Crossbow(1d10)</span></p>
+</td>
+<td width="122" height="32" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">Handaxe(1d6)</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="33" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">Wizard</span></p>
+</td>
+<td height="33" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">10</span></p>
+</td>
+<td height="33" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">12</span></p>
+</td>
+<td height="33" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">14</span></p>
+</td>
+<td height="33" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">15</span></p>
+</td>
+<td height="33" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">13</span></p>
+</td>
+<td height="33" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">8</span></p>
+</td>
+<td width="68" height="33" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">Magic Missile(1d12)</span></p>
+</td>
+<td width="65" height="33" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">Dagger(1d4)</span></p>
+</td>
+<td width="122" height="33" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">Fireball(1d6)</span></p>
+</td>
+</tr>
+<tr valign="top">
+<td height="31" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">Cleric</span></p>
+</td>
+<td height="31" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">14</span></p>
+</td>
+<td height="31" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">12</span></p>
+</td>
+<td height="31" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">12</span></p>
+</td>
+<td height="31" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">14</span></p>
+</td>
+<td height="31" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">10</span></p>
+</td>
+<td height="31" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">14</span></p>
+</td>
+<td width="68" height="31" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">Silver Shortsword(1d9)</span></p>
+</td>
+<td width="65" height="31" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">Warhammer(1d8)</span></p>
+</td>
+<td width="122" height="31" style="border-color : #000000 #000000 #000000 #000000; border-style: solid;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Nirmala UI', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">Light Crossbow(1d8)</span></p>
+</td>
+</tr>
+</table>
+</div>
+	  <p style=" font-size: 18pt; "><b>Tutorial</b></p>
+	  <hr noshade color="#ABABAB" />
+	  <img src="pic_1.jpg" width="713" height="100" alt="screenshot of `welcome to dungeoneer` page" title="" />
+	  <p style=" text-indent: 4%; ">This is what you should see when opening Dungeoneer.  (If your initial mission is different, don't sweat: it's randomized)  The program will welcome you, tell you an arbitrary motivation for adventuring, and ask you which class you would like to be.  Strings are not acceptable here, just the number that appears beside the class name in the prompt.  Once you have made your selection, Dungeoneer will spit out a description of who your adventurer is and what they are equipped with, which should look something like this(for a fighter).</p>
+	  <img src="pic_2.jpg" alt="screenshot of class description" />
+	  <p style=" text-indent: 4%; ">After telling you who your adventurer is and what they carry, Dungeoneer will give you a basic notion of your surroundings.  After that, it will confront you with the indomitable "What would you like to do?" prompt.  All supported inputs are listed in a table above.</p>
+	  <p style=" text-indent: 4%; ">Looking at the table above, your only reasonable options are to move or attack.  Since Dungoneer does not yet have a detailed world map system, you will always be ready to fight.  Attacking immediately is the most common course of action, as it shows off the combat system(basically the only achievement of Dungoneer thus far).</p>
+	  <img src="pic_3.jpg" alt="screenshot of combat system" />
+	  <p style="text-indent: 4%;">Here is a screenshot of the combat system.  In this case, a cleric just attacked someone with his silvered shortsword.  He missed, and his enemy scored a hit on him.  However, the enemy dealt no damage because the cleric's armor absorbed the blow.  Note that since the cleric has entered combat, his only options are to attack, dodge or disengage.</p>
+	  <p style="text-indent: 4%;">Also note that disengaging has a chance of failure, as demonstrated in this next screenshot.  Note that there is no attack message for the enemy because, apparently, his attack roll failed.</p>
+	  <img src="pic_4.jpg" alt="screenshot of failed disengage action" />
+	  <p style="text-indent:4%;">Most D&D players don't realize that they can just "dodge" on their turn, imposing disadvantage on enemy attack rolls.  Disadvantage means that a character has to roll two 20-sided dice and use the lesser roll to determine the outcome of the attack.  Advantage is similar, but you get to use the greater roll.  This is a thing you can do in Dungeoneer, too!  Just enter "2" while in combat to dodge!</p>
+  </body>
+</html>
