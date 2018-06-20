@@ -45,8 +45,6 @@ Please note that at this point in time the C++ version is only semi-playable due
 
 Please note that this game is WORK IN PROGRESS.
 
-Please note that this folder is a Mercurial repository committed in TortoiseHG(an upload to GitHub is a possibility, but the GitHub version will not be updated as regularly as the TortoiseHG version).
-
 Please note that "utils.h" is a C++ header file written by me and is covered under the license(it is also necessary to compile a modified version of Dungeoneer if need be).
 
 ------------------------
@@ -91,12 +89,30 @@ Keyboard shortcuts: (for SmallBasic version)
 ==        C++        ==
 -----------------------
 Menu inputs:
-1 - Attack
-2 - Move
-3 - Long Rest
-4 - Short Rest
-5 - Disengage
-6 - Scan/Look around
+1 - Attack - Start combat
+2 - Move - Travel to a different town
+3 - Long Rest - Rest for 8 hours and regain all lost HP
+4 - Short Rest - Rest for 1 hour and regain 1d4 HP
+5 - Disengage(deprecated, doesn't work)
+6 - Scan/Look around - prints a rather useless description of your surroundings
+7 - Checkup/Check - prints the items in your inventory and your HP
+8 - Eat - consume 1 day's worth of rations
+9 - Drink - drink a bit from a bottomless canteen(doesn't work if you don't have a canteen, but doesn't consume canteen either)
+10 - Buy Food - Try to find a merchant to sell you rations
+11 - Purchase - Try to find a merchant to sell you any item you want (refer to item ID table in the Dungeoneer/docs folder)
+12 - Hunt - Search for a wild animal to kill for meat
+13 - Sell - Try to find a merchant to buy your goods(this goes in conjunction with hunting, as it can give you money for meat)
+------------
+-- Cheats --
+------------ (input these words, exactly, into the regular menu to get free stuff)
+TENDEES! - Instantly gain 1000 food
+midas or I_LIKE_GOLD_LLC - Have all of your possessions instantly turned into gold pieces
+----------------
+-- Boss Fight --
+---------------- (input these into main menu)
+philswift - Phil Swift, eternal advertising face of the Flex-brand products, descends from heaven and tries to saw you in half! (if you somehow kill him, you get 100 FlexTape!)
+flextape - can be used both in combat and out, healing 10 HP for each meter used!
+
 Combat menu inputs
 1 - Attack
 2 - Dodge
@@ -106,56 +122,3 @@ Attack Options:
 1 - First attack slot
 2 - Second attack slot
 3 - Third attack slot
----EQUIPMENT BY CLASS--
-Fighter----------------
-SLOT 1: Longsword 1d8 slashing damage
-SLOT 2: Dagger 1d4 piercing damage
-SLOT 3: Light Crossbow 1d8 piercing damage
-Explorer's Pack
--backpack
--bedroll
--mess kit(food prep supplies)
--10 days rations
--tinderbox
--10 torches
--waterskin
--50 feet of rope
-Rogue-----------------
-SLOT 1: Shortsword 1d6 slashing damage
-SLOT 2: Crossbow 1d10 piercing damage
-SLOT 3: Handaxe 1d6 slashing damage
-Burglar's Pack
--backpack
--bag of 1000 ball bearings
--crowbar
--hooded lantern
--2 flasks of oil
--10 ft of string
--5 candles
--hammer
--10 pitons
--5 days rations
--tinderbox
--50ft rope
-Wizard--------------
-SLOT 1: Magic Missile 1d12 + 3 magic damage
-SLOT 2: Dagger 1d4 piercing damage
-SLOT 3: Fireball 1d6 fire damage
-Mage's Pack(not present in D&D but whatever)
--backpack
--materials required to cast fireball spells(balls of bat guano)
--spellcasting focus(either staff or magical weapon)
--10 days rations
--spellbook
-Cleric-------------
-SLOT 1: Silvered Shortsword 1d8 + 1 slashing damage
-SLOT 2: Warhammer 1d8 bludgeoning damage
-SLOT 3: Light crossbow 1d8 piercing damage
-Priest's Pack(different contents than in D&D but whatever)
--holy water
--holy symbol
--ritual materials
--10 days rations
--long knife
--tinderbox
--urn of relative's ashes
