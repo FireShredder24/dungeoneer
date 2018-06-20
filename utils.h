@@ -18,7 +18,7 @@ unsigned short int day = 15, month = 6, year = 1456;
 namespace utils { // All functions defined within this namespace are called using utils::ID ();
 void scan () { // Random sentence generator
 	if (set1 == '\0'/*&& scanstik*/) { // If set1 doesn't have a value yet, randomize.  If it does, don't change it until you move!
-		set1 = rand() % 5;
+		set1 = rand() % 5; // BTW the don't change until move thing doesn't work
 		set2 = rand() % 5;
 		set3 = rand() % 5;
 	}
@@ -106,10 +106,9 @@ void scan () { // Random sentence generator
 	scanstik = false;
 }
 
-int toprand (int max) {
-	int temp = rand() % max;
-	if (temp == 0)
-		temp = 1;
+int toprand (int max) { // Generating a random number between 1 and max
+	int temp = rand() % max + 1;
+	temp += 1;
 	return temp;
 	delete &temp;
 }
@@ -180,7 +179,7 @@ int getModifier (int abScore) { // Converting an ability score into its appropri
 			break;
 	}
 }
-void setDay (int num) {
+void setDay (int num) { // A system for incrementing units of time
 	day = day + num;
 	if (day > 30) {
 		day = 1 + num - (30 - (day - num));
@@ -191,7 +190,7 @@ void setDay (int num) {
 		}
 	}
 }
-float calcDist (int Newx, int Newy) {
+float calcDist (int Newx, int Newy) { // Pythagorean Theorem calculator for determining "as the crow flies" distance(technically inaccurate because of landforms, roads, etc.)
 	newx = abs(Newx - x);
 	newy = abs(Newy - y);
 	float dist = sqrt(newx*newx+newy*newy);

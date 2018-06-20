@@ -14,6 +14,7 @@
 #include "utils.h" // This is a local file that I wrote to reduce the amount of non-Dungeoneer-specific functions in this file
 
 // Namespaces are prefixes for library functions that allow other functions outside of that namespace to have the same identifier
+// For example, std::cout() will NOT call the same function as cout() unless a `using namespace std;` line is in the code.  `using namespace` calls are used so you don't have to type the namespace before every call of a library function
 using namespace std;
 using namespace utils;
 
@@ -37,7 +38,7 @@ class NPC { // The non-player character class.  Includes all the variables and m
 		void dealDamage (int, bool, bool); // Attack
 		void takeDamage (int); // Modify own HP
 		void set (string, int, int, int, int, int, int, int, int, int, int, bool, int, int, string, string, string, int); // Same as the constructor but can be called at any time
-		NPC (string, int, int, int, int, int, int, int, int, int, int, bool, int, int, string, string, string, int); // Set initial values
+		NPC (string, int, int, int, int, int, int, int, int, int, int, bool, int, int, string, string, string, int); // Set initial values, this is called a constructor and it has no type
 };
 // Predefining functions to prevent compilation errors
 void act ();
@@ -57,7 +58,7 @@ unsigned short int DamDie [3] = { 8, 4, 8 };
 unsigned short int inv [30];
 string invNames [30];
 unsigned short int ScoreAssoc [3];
-signed short int HP; // Signed short means from -255 to 255
+signed short int HP; // Signed short means from -127 to 127
 unsigned short int maxHP;
 int tempint;
 string tempstrg;
@@ -65,7 +66,7 @@ string tempstrg;
 // Notice that this generic NPC is a flat character--its ability scores are all the same!
 // An actual player would never create a character like this.(but its a good representation of a generic 1st level unclassed enemy)(and might be hilarious for a 1st-level wizard...)
 NPC Enemy ("Enemy", 13, 13, 13, 13, 13, 13, 6, 8, 4, 12, true, -1, 1, "scimitar", "light crossbow", "dagger", 2);
-void setInvNames () { // Setting the array of names for the 28 items in Dungeoneer.
+void setInvNames () { // Setting the array of names for the items in Dungeoneer.
 invNames[1] = "longsword";
 invNames[2] = "shortsword";
 invNames[3] = "crossbow";
@@ -266,7 +267,7 @@ void attack (int atkType, bool hasAdv, bool hasDis) {
 		act();
 	}
 }
-void move () {
+void move () { // Old, deprecated version of the move command(this is from the pre-map versions and probably shouldn't be here)
 	if (inCombat == false) {
 		tempint = rand() % 5;
 		scanstik = true;
@@ -354,6 +355,7 @@ void ACT () { // This function is here so act() can be called from within itself
 void act () {
 	if (HP > maxHP)
 		HP = maxHP;
+	/*if (!HP <= -maxHP) {*/
 	cout << "What would you like to do? ";
 	string act;
 	cin >> act;
@@ -786,6 +788,10 @@ void act () {
 			ACT ();
 		}
 	}
+	/*} else {
+		cout << "You have deceased.";
+		getchar();
+	}*/
 }
 void setClass () {
 	switch (clas) {
