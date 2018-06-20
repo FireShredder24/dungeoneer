@@ -7,26 +7,28 @@
 |___/ \__/ |   \| \__/ |___ \__/ |   \| |___ |___ |  \
 
 */
-#include <iostream>
-#include <string>
-#include <stdlib.h> // These are preprocessor directives -- they tell the compiler to "include" these specified libraries of pre-written functions into your code
-#include "utils.h"
+// These are preprocessor directives -- they tell the compiler to "include" these specified libraries of pre-written functions into your code
+#include <iostream> // Standard input and output
+#include <string> // Class for dealing with groups of characters such as words or sentences
+#include <stdlib.h> // This is the entire C++ standard library
+#include "utils.h" // This is a local file that I wrote to reduce the amount of non-Dungeoneer-specific functions in this file
 
+// Namespaces are prefixes for library functions that allow other functions outside of that namespace to have the same identifier
 using namespace std;
 using namespace utils;
 
 class NPC { // The non-player character class.  Includes all the variables and member functions required for a good D&D character.
-	protected:
+	protected: // These members can only be accessed from members of this class
 		unsigned short int strg, cons, dext, intl, chas, wisd; // Ability scores
 		bool isIncap; // Is the NPC incapacitated?
 		bool isUndead; // Is it an undead(aka a zombie)?  (this determines whether it can be damaged by a cleric presenting their holy symbol, for example)
 		string wepstr1, wepstr2, wepstr3;
-	public:
+	public: // These members can be accessed from anywhere
 		unsigned short int damDie[3]; // Damage dies for the three attack slots
-		string Name;
+		string Name; // an identifying variable used to determine loot when an NPC is killed
 		short int npcHP; // HP for the NPC
 		short int maxHP; // Maximum HP
-		unsigned short int ac;
+		unsigned short int ac; // This number is subtracted from damage dealt to the NPC, it represents the armor class
 		bool isEnemy; // Whether to damage the enemy or the player
 		bool isDead; // Used to validate kill messages so the attack function doesn't have to
 		unsigned int ID; // A number that could in later versions be used to identify NPCs
