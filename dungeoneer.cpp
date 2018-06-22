@@ -140,7 +140,7 @@ void NPC::dealDamage (int atkType, bool hasAdv, bool hasDis) { // Implement meth
 		}
 	} else if (atkRoll >= 10 && !isEnemy && !isDead && !isIncap) {
 		damage = toprand(damDie[atkType]);
-		damage = damage - Enemy.ac; // Accounting for the enemy's armor class
+		damage = damage - ac; // Accounting for the enemy's armor class
 		damage = damage + getModifier(strg); // Adding strength modifier
 		Enemy.takeDamage (damage);
 	} else if (atkRoll <= 9) 
@@ -266,39 +266,6 @@ void attack (int atkType, bool hasAdv, bool hasDis) {
 		Enemy.dealDamage (toprand(3), false, false);
 		act();
 	}
-}
-void move () { // Old, deprecated version of the move command(this is from the pre-map versions and probably shouldn't be here)
-	if (inCombat == false) {
-		tempint = rand() % 5;
-		scanstik = true;
-		if (init == 3) {
-			cout << "You stay in your village, gathering a militia and building a palisade wall." << endl;
-			act ();
-		}
-		else {
-			setDay(1);
-			switch (tempint) {
-				case 0:
-					cout << "You spend one day traveling offroad.";
-					break;
-				case 1:
-					cout << "You spend one day traveling on the main road.";
-					break;
-				case 2:
-					cout << "You amble off the side of a forest trail after one day.";
-					break;
-				case 3:
-					cout << "You stop for a break on the slopes of a rocky mountain after one day.";
-					break;
-				case 4:
-					cout << "You travel for one day along a little-used wagon track.";
-					break;
-			}
-			cout << " It is now the " << day << "th day of the " << month << "th month, " << year << "." << endl;
-		}
-	} else
-		cout << "You are in combat. ";
-	act ();
 }
 void mover () {
 	if (inCombat == false) {
@@ -733,6 +700,8 @@ void act () {
 			}
 			ACT ();
 		}
+		else if (act == "exit" || act == "quit" || act == "9001")
+			cout << "Goodbye...";
 		else {
 			cout << "Unacceptable input.  Refer to the README for more information." << endl;
 			ACT ();

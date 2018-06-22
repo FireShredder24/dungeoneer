@@ -13,7 +13,7 @@ bool isDark, isWet, isSad, isHappy; // Booleans used to determine the overall "f
 
 bool scanstik = true;
 
-unsigned short int day = 15, month = 6, year = 1456;
+unsigned short int day = 15, month = 6, year = 1456, hour = 12;
 
 namespace utils { // All functions defined within this namespace are called using utils::ID ();
 void scan () { // Random sentence generator
@@ -107,8 +107,8 @@ void scan () { // Random sentence generator
 }
 
 int toprand (int max) { // Generating a random number between 1 and max
-	int temp = rand() % max + 1;
-	temp += 1;
+	int temp = rand() % max;
+	temp = temp + 1;
 	return temp;
 	delete &temp;
 }
@@ -179,16 +179,31 @@ int getModifier (int abScore) { // Converting an ability score into its appropri
 			break;
 	}
 }
-void setDay (int num) { // A system for incrementing units of time
-	day = day + num;
-	if (day > 30) {
-		day = 1 + num - (30 - (day - num));
-		month = month + 1;
-		if (month > 12) {
-			month = 1;
-			year = year + 1;
+void setHour (int num) { // A system for incrementing units of time
+	hour = hour + num;
+	if (hour > 24) {
+		day += 1;
+		hour = hour - 24;
+		if (day > 30) {
+			day = 1 + num - (30 - (day - num));
+			month = month + 1;
+			if (month > 12) {
+				month = 1;
+				year = year + 1;
+			}
 		}
 	}
+}
+void setDay (int num) { // A system for incrementing units of time
+		day += num;
+		if (day > 30) {
+			day = 1 + num - (30 - (day - num));
+			month = month + 1;
+			if (month > 12) {
+				month = 1;
+				year = year + 1;
+			}
+		}
 }
 float calcDist (int Newx, int Newy) { // Pythagorean Theorem calculator for determining "as the crow flies" distance(technically inaccurate because of landforms, roads, etc.)
 	newx = abs(Newx - x);
