@@ -299,7 +299,7 @@ void mover () {
 		if (dist == 0)
 			cout << "You are in the town which you want to travel to." << endl;
 		else {
-			cout << "It will take " << distint << " days to reach " << place << ".  Start traveling? ";
+			cout << "It will take " << distint << " days to reach " << place << ".  You will also eat " << distint << " days of rations.  Start traveling? ";
 			string query;
 			cin >> query;
 			if (query == "yes" || query == "y") {
@@ -307,7 +307,7 @@ void mover () {
 				inv[20] = inv[20] - distint;
 				x = newx;
 				y = newy;
-				cout << "You have traveled to " << place << " over the course of " << distint << " days.  You ate that much food during that time.\n";
+				cout << "You have traveled to " << place << " over the course of " << distint << " days.  You have " << inv[20] << " days of rations left.\n";
 			} else if (query == "no" || query == "n") {
 				cout << "You decide to stay where you are.\n";
 			}
@@ -412,7 +412,7 @@ void act () {
 			tempint = toprand(20);
 			float cost;
 			if (tempint >= 10) {
-				cout << "You found a merchant.  What do you want to buy? (enter an item ID from the table in the docs folder)\n";
+				cout << "You found a merchant.  What do you want to buy? (enter an item ID from the table in the docs folder, however not all items can be purchased here)\n";
 				cin >> tempint;
 				switch (tempint) {
 					case 1:
@@ -430,7 +430,7 @@ void act () {
 					case 5:
 						cost = 5;
 						break;
-					case 6:
+					/*case 6:
 						cost = 6;
 						break;
 					case 7:
@@ -441,7 +441,7 @@ void act () {
 						break;
 					case 9:
 						cost = 15;
-						break;
+						break;*/
 					case 10:
 						cost = 0.25;
 						break;
@@ -466,21 +466,21 @@ void act () {
 					case 17:
 						cost = 2;
 						break;
-					case 18:
+					/*case 18:
 						cost = 0.5;
 						break;
 					case 19:
 						cost = 35;
-						break;
+						break;*/
 					case 20:
 						cost = 0.5;
 						break;
-					case 21:
+					/*case 21:
 						cost = 0.1;
 						break;
 					case 22:
 						cost = 0.5;
-						break;
+						break;*/
 					case 23:
 						cost = 10;
 						break;
@@ -496,10 +496,13 @@ void act () {
 					case 28:
 						cost = 1;
 						break;
-					case 29:
+					/*case 29:
 						cost = 20;
-						break;
+						break;*/
 				}
+				if (cost == 0){
+					cout << "That item cannot be purchased from this merchant.\n";
+				} else {
 				cout << "How many " << invNames[tempint] << " do you want to purchase?  Each one will cost you " << cost << " gold pieces.\n";
 				int tempint2;
 				cin >> tempint2;
@@ -509,6 +512,7 @@ void act () {
 					cout << "You bought " << tempint2 << " " << invNames[tempint] << "(s) for " << tempint2*cost << " gold pieces.\n";
 				} else {
 					cout << "You don't have enough gold pieces to buy " << tempint2 << " " << invNames[tempint] << "(s).\n";
+				}
 				}
 			} else {
 				cout << "You were not able to find a merchant willing to sell you goods.\n";
@@ -700,8 +704,69 @@ void act () {
 			}
 			ACT ();
 		}
-		else if (act == "exit" || act == "quit" || act == "9001")
-			cout << "Goodbye...";
+		else if (act == "exit" || act == "quit" || act == "9001") {
+			string query;
+			cout << "Do you really want to quit Dungeoneer? If so, enter `y` or `yes`.  (Any other input will be regarded as no)\n";
+			cin >> query;
+			if (query == "y" || query == "yes")
+				cout << "Goodbye...";
+			else
+				ACT();
+		}
+		else if (act == "black_market" || act == "14" || act == "purchase_black") {
+			tempint = toprand(20);
+			float cost;
+			if (tempint >= 10) {
+				cout << "You found a merchant.  What do you want to buy? (enter an item ID from the table in the docs folder, however not all items can be purchased here)\n";
+				cin >> tempint;
+				switch (tempint) {
+					case 6:
+						cost = 6;
+						break;
+					case 7:
+						cost = 25;
+						break;
+					case 8:
+						cost = 30;
+						break;
+					case 9:
+						cost = 15;
+						break;
+					case 18:
+						cost = 0.5;
+						break;
+					case 19:
+						cost = 35;
+						break;
+					case 21:
+						cost = 0.1;
+						break;
+					case 22:
+						cost = 0.5;
+						break;
+					case 29:
+						cost = 20;
+						break;
+				}
+				if (cost == 0){
+					cout << "That item cannot be purchased from this merchant.\n";
+				} else {
+				cout << "How many " << invNames[tempint] << " do you want to purchase?  Each one will cost you " << cost << " gold pieces.\n";
+				int tempint2;
+				cin >> tempint2;
+				if (inv[27] >= tempint2*cost) {
+					inv[27] = inv[27] - tempint2*cost;
+					inv[tempint] = inv[tempint] + tempint2;
+					cout << "You bought " << tempint2 << " " << invNames[tempint] << "(s) for " << tempint2*cost << " gold pieces.\n";
+				} else {
+					cout << "You don't have enough gold pieces to buy " << tempint2 << " " << invNames[tempint] << "(s).\n";
+				}
+				}
+			} else {
+				cout << "You were not able to find a merchant willing to sell you goods.\n";
+			}
+			ACT();
+		}
 		else {
 			cout << "Unacceptable input.  Refer to the README for more information." << endl;
 			ACT ();
