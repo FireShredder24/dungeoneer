@@ -71,7 +71,7 @@ Wizard
 -high intelligence
 
 Cleric
--medium melee and ranged damage, however no magic At The Moment(see Planned Features in the documentation)
+-medium melee and ranged damage
 -Medium HP
 -high intelligence and charisma
 -----------------------

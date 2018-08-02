@@ -767,12 +767,14 @@ void act () {
 			}
 			ACT();
 		}
+		// else if (act == "talents" || act == "15") {} Opens the talents menu, where you can view available talents, enabled talents, learn new talents, level up old ones, and more!
+		// else if (act == "loadout" || act == "16") {} Opens the loadout editor where weapons, talents, armor, and more can be managed easily.
 		else {
 			cout << "Unacceptable input.  Refer to the README for more information." << endl;
 			ACT ();
 		}
 	} else {
-		if (act == "attack" || act == "1") {
+		if (act == "attack" || act == "1") { // Soon to be changed to a system that uses the player's inventory to determine weapons
 			// weapon chooser
 			int wep;
 			cout << "Which weapon will you use? Choices: ";
