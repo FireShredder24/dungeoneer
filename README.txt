@@ -47,6 +47,9 @@ Please note that this game is WORK IN PROGRESS.
 
 Please note that "utils.h" is a C++ header file written by me and is covered under the license(it is also necessary to compile a modified version of Dungeoneer if need be).
 
+=====MAP.TXT=====
+When using map.txt, the line numbers are the shortcut numbers of each town. (PLEASE get a modern text editor like Sublime Text or Notepad++)
+
 ------------------------
 Class Notes: (valid across both versions and D&D)
 
@@ -101,7 +104,8 @@ Menu inputs:
 10 - Buy Food - Try to find a merchant to sell you rations
 11 - Purchase - Try to find a merchant to sell you any item you want (refer to item ID table in the Dungeoneer/docs folder)
 12 - Hunt - Search for a wild animal to kill for meat
-13 - Sell - Try to find a merchant to buy your goods(this goes in conjunction with hunting, as it can give you money for meat)
+13 - Sell - Try to find a merchant to buy your goods(this goes in conjunction with hunting, as you can sell food)
+9001 - Exit - Closes Dungeoneer.
 ------------
 -- Cheats --
 ------------ (input these words, exactly, into the regular menu to get free stuff)
