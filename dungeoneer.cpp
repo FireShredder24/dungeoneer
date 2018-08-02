@@ -758,21 +758,34 @@ void act () {
 					inv[27] = inv[27] - tempint2*cost;
 					inv[tempint] = inv[tempint] + tempint2;
 					cout << "You bought " << tempint2 << " " << invNames[tempint] << "(s) for " << tempint2*cost << " gold pieces.\n";
+					tempint2 = toprand(5);
+					if (tempint2 >= 4) {
+						cout << "After leaving the black market, an officer from the local militia confronts you.\n";
+						Enemy.set ("militia", 15, 14, 14, 11, 10, 12, 8, 4, 8, 10, true, 2, 1, "longsword", "dagger", "light crossbow", 3); // Setting the militiaman's stats
+						Enemy.dealDamage (toprand(3), false, false);
+					}
 				} else {
 					cout << "You don't have enough gold pieces to buy " << tempint2 << " " << invNames[tempint] << "(s).\n";
 				}
 				}
-			} else {
+			} else if (tempint == 2) {
+				cout << "On your way to find a black market merchant, an officer from the local militia confronts you.\n";
+				Enemy.set ("militia", 15, 14, 14, 11, 10, 12, 8, 4, 8, 10, true, 2, 1, "longsword", "dagger", "light crossbow", 3); // Setting the militiaman's stats
+				Enemy.dealDamage (toprand(3), false, false);
+			} 
+			else {
 				cout << "You were not able to find a black market merchant.\n";
 			}
 			ACT();
 		}
+		// else if (act == "talents" || act == "15") {} Opens the talents menu, where you can view available talents, enabled talents, learn new talents, level up old ones, and more!
+		// else if (act == "loadout" || act == "16") {} Opens the loadout editor where weapons, talents, armor, and more can be managed easily.
 		else {
 			cout << "Unacceptable input.  Refer to the README for more information." << endl;
 			ACT ();
 		}
 	} else {
-		if (act == "attack" || act == "1") {
+		if (act == "attack" || act == "1") { // Soon to be changed to a system that uses the player's inventory to determine weapons
 			// weapon chooser
 			int wep;
 			cout << "Which weapon will you use? Choices: ";

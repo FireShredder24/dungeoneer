@@ -25,7 +25,7 @@ SOFTWARE.
 ------------------------
  ___               __   ___  __          ___  ___ ___
 |   \ |  | |\   | /  \ |    /  \ |\   | |    |    |  \
-|   | |  | | \  | |    |--- |  | | \  | |--- |--- |--/
+|   | |  | | \  | | _  |--- |  | | \  | |--- |--- |--/
 |   | |  | |  \ | |  \ |    |  | |  \ | |    |    | \
 |___/ \__/ |   \| \__/ |___ \__/ |   \| |___ |___ |  \
 
@@ -36,6 +36,8 @@ SOFTWARE.
   And MS Small Basic
 ------------------------
 INFORMATION
+
+Dungeoneer is compiled for 32-bit systems but it works on 64-bit as well.
 
 There are two versions of Dungeoneer, one written in C++ and the other in SmallBasic.  The C++ source code is available as "dungeoneer.cpp", SmallBasic source code is available as "dungeoneer_sb.sb".  The C++ version executable is "dungeoneer.exe", SmallBasic version executable is "dungeoneer_sb.exe".
 
@@ -51,6 +53,7 @@ Please note that "utils.h" is a C++ header file written by me and is covered und
 
 =====MAP.TXT=====
 When using map.txt, the line numbers are the shortcut numbers of each town.
+To enable line numbers in MS Notepad, click "View" then enable "Status Bar".
 
 ------------------------
 Class Notes: (valid across both versions and D&D)
@@ -71,7 +74,7 @@ Wizard
 -high intelligence
 
 Cleric
--medium melee and ranged damage, however no magic At The Moment(see Planned Features in the documentation)
+-medium melee and ranged damage
 -Medium HP
 -high intelligence and charisma
 -----------------------
