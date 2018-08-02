@@ -714,10 +714,10 @@ void act () {
 				ACT();
 		}
 		else if (act == "black_market" || act == "14" || act == "purchase_black") {
-			tempint = toprand(20);
+			tempint = toprand(6);
 			float cost;
-			if (tempint >= 10) {
-				cout << "You found a merchant.  What do you want to buy? (enter an item ID from the table in the docs folder, however not all items can be purchased here)\n";
+			if (tempint == 1) {
+				cout << "You found a black market merchant.  What do you want to buy? (enter an item ID from the table in the docs folder, however not all items can be purchased here)\n";
 				cin >> tempint;
 				switch (tempint) {
 					case 6:
@@ -763,7 +763,7 @@ void act () {
 				}
 				}
 			} else {
-				cout << "You were not able to find a merchant willing to sell you goods.\n";
+				cout << "You were not able to find a black market merchant.\n";
 			}
 			ACT();
 		}

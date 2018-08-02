@@ -39,6 +39,8 @@ INFORMATION
 
 There are two versions of Dungeoneer, one written in C++ and the other in SmallBasic.  The C++ source code is available as "dungeoneer.cpp", SmallBasic source code is available as "dungeoneer_sb.sb".  The C++ version executable is "dungeoneer.exe", SmallBasic version executable is "dungeoneer_sb.exe".
 
+HTML Documentation is available at https://fireshredder24.github.io/dungeoneer for the C++ edition.  Small Basic Edition documentation is coming soon!
+
 Please note that the C++ and SmallBasic versions are BY NO MEANS THE SAME!  The C++ version includes several optimizations over the SmallBasic version in the use of classes and dynamic memory usage, as well as completely different functionality!
 
 Please note that at this point in time the C++ version is only semi-playable due to being incomplete.
@@ -46,6 +48,9 @@ Please note that at this point in time the C++ version is only semi-playable due
 Please note that this game is WORK IN PROGRESS.
 
 Please note that "utils.h" is a C++ header file written by me and is covered under the license(it is also necessary to compile a modified version of Dungeoneer if need be).
+
+=====MAP.TXT=====
+When using map.txt, the line numbers are the shortcut numbers of each town.
 
 ------------------------
 Class Notes: (valid across both versions and D&D)
@@ -66,7 +71,7 @@ Wizard
 -high intelligence
 
 Cleric
--specializes in Magic damage but also has medium melee and ranged damage
+-medium melee and ranged damage, however no magic At The Moment(see Planned Features in the documentation)
 -Medium HP
 -high intelligence and charisma
 -----------------------
@@ -99,9 +104,11 @@ Menu inputs:
 8 - Eat - consume 1 day's worth of rations
 9 - Drink - drink a bit from a bottomless canteen(doesn't work if you don't have a canteen, but doesn't consume canteen either)
 10 - Buy Food - Try to find a merchant to sell you rations
-11 - Purchase - Try to find a merchant to sell you any item you want (refer to item ID table in the Dungeoneer/docs folder)
+11 - Purchase - Try to find a merchant to sell some common items (refer to docs/items.pdf.  Items with BLACK MARKET cannot be bought this way.)
 12 - Hunt - Search for a wild animal to kill for meat
-13 - Sell - Try to find a merchant to buy your goods(this goes in conjunction with hunting, as it can give you money for meat)
+13 - Sell - Try to find a merchant to buy your goods(this goes in conjunction with hunting, as you can sell food)
+14 - Black Markets - Try to find a merchant who will sell you more unusual goods.(refer to docs/items.pdf.  Items with BLACK MARKET are the only items that can be bought with this command. You only have a 1/6 chance of finding a black market merchant.)
+9001 - Exit - Closes Dungeoneer.
 ------------
 -- Cheats --
 ------------ (input these words, exactly, into the regular menu to get free stuff)
