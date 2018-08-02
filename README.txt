@@ -39,6 +39,8 @@ INFORMATION
 
 There are two versions of Dungeoneer, one written in C++ and the other in SmallBasic.  The C++ source code is available as "dungeoneer.cpp", SmallBasic source code is available as "dungeoneer_sb.sb".  The C++ version executable is "dungeoneer.exe", SmallBasic version executable is "dungeoneer_sb.exe".
 
+HTML Documentation is available at https://fireshredder24.github.io/dungeoneer for the C++ edition.  Small Basic Edition documentation is coming soon!
+
 Please note that the C++ and SmallBasic versions are BY NO MEANS THE SAME!  The C++ version includes several optimizations over the SmallBasic version in the use of classes and dynamic memory usage, as well as completely different functionality!
 
 Please note that at this point in time the C++ version is only semi-playable due to being incomplete.
@@ -69,7 +71,7 @@ Wizard
 -high intelligence
 
 Cleric
--specializes in Magic damage but also has medium melee and ranged damage
+-medium melee and ranged damage, however no magic At The Moment(see Planned Features in the documentation)
 -Medium HP
 -high intelligence and charisma
 -----------------------
