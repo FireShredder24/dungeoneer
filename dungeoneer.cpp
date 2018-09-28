@@ -45,18 +45,27 @@ void act ();
 void move ();
 void attack (int, bool, bool);
 void setClass ();
+void updtLvl();
 
 // Predefining variables to prevent compilation errors
 unsigned short int init; // Unsigned short means from 0 to 255
 unsigned short int cla;
 int clas;
 int atkRoll;
+int lvl;
 bool inCombat = false;
 
-unsigned short int Str, Dex, Con, Intl, Wis, Cha, AC;
+unsigned short int Str, Dex, Con, Intl, Wis, Cha, AC, XP;
 unsigned short int DamDie [3] = { 8, 4, 8 };
-unsigned short int inv [30];
-string invNames [30];
+unsigned short int inv [45];
+unsigned short int splDie [20];
+string splNames[20];
+int spellID[3];
+int wepID[3];
+int wepDie[9];
+int armorType;
+string invNames [45];
+unsigned short int lvlXP [50];
 unsigned short int ScoreAssoc [3];
 signed short int HP; // Signed short means from -127 to 127
 unsigned short int maxHP;
@@ -96,6 +105,52 @@ invNames[26] = "clothes";
 invNames[27] = "gold piece";
 invNames[28] = "backpack";
 invNames[29] = "FlexTape";
+invNames[30] = "filled canteen";
+}
+void setSpellDies () {
+	splDie[1] = 15;
+	splDie[2] = 10;
+	splDie[3] = 18;
+	splDie[4] = 20;
+	splDie[5] = 4;
+	splDie[6] = 10;
+	splDie[7] = 4;
+	splDie[8] = 30;
+	splDie[9] = 10;
+	splDie[10] = 16;
+	splNames[1] = "Magic Missile";
+	splNames[2] = "Fireball";
+	splNames[3] = "Burning Hands";
+	splNames[4] = "Decapitation";
+	splNames[5] = "Holy Symbol";
+	splNames[6] = "Hyperdab";
+	splNames[7] = "Nauseator";
+	splNames[8] = "Inside-Out";
+	splNames[9] = "Inflict Wounds";
+	splNames[10] = "Thunderwave";
+}
+void setLvlInfo () {
+	lvlXP[1] = 100;
+	lvlXP[2] = 200;
+	lvlXP[3] = 400;
+	lvlXP[4] = 600;
+	lvlXP[5] = 800;
+	lvlXP[6] = 1000;
+	lvlXP[7] = 1300;
+	lvlXP[8] = 1600;
+	lvlXP[9] = 1900;
+	lvlXP[10] = 2100;
+}
+void wepDies () {
+	wepDie[1] = 8;
+	wepDie[5] = 4;
+	wepDie[4] = 8;
+	wepDie[6] = 6;
+	wepDie[2] = 6;
+	wepDie[3] = 10;
+	wepDie[7] = 8;
+	wepDie[8] = 12;
+	wepDie[9] = 6;
 }
 void setMap () {
 	x = 20;
@@ -155,17 +210,23 @@ void NPC::takeDamage (int damage) {
 			isDead = true;
 			if (Name == "wild boar") {
 				inv[20] = inv[20] + toprand(15) + 20;
+				XP+=25;
 			} else if (Name == "wild dog") {
 				inv[20] = inv[20] + toprand(5) + 5;
+				XP+=25;
 			} else if (Name == "wild turkey") {
 				inv[20] = inv[20] + toprand(20) + 10;
+				XP+=25;
 			} else if (Name == "wild bull") {
 				inv[20] = inv[20] + toprand(20) + 40;
+				XP+=50;
 			} else if (Name == "wild badger") {
 				inv[20] = inv[20] + toprand(15) + 5;
+				XP+=25;
 			} else if (Name == "Phil Swift") {
 				inv[29] = inv[29] + 100;
 				cout << "You pick up 100 FlexTape from Phil Swift's earthly body as his soul returns to heaven.  You hear his voice telling you that FlexTape can be used to treat wounds instantly.\n";
+				XP+=200;
 			} else if (Name == "goblin") {
 				inv[9]+=1;
 				inv[24]+=1;
@@ -173,13 +234,16 @@ void NPC::takeDamage (int damage) {
 				inv[4]+=1;
 				inv[5]+=1;
 				inv[10]+=20;
+				XP+=75;
 			} else if (Name == "thief") {
 				inv[5]+=3;
 				inv[27]+=10;
 				inv[26]+=1;
 				inv[17]+=1;
 				inv[4]+=1;
+				XP+=50;
 			}
+			updtLvl();
 		}
 		else {
 		isIncap = true; // If not, render it unconcious
@@ -239,6 +303,33 @@ void NPC::set (string name, int str, int con, int dex, int inl, int cha, int wis
 	wepstr2 = wep2;
 	wepstr3 = wep3;
 	ac = Ac;
+}
+void spell (int spellType) {
+	inCombat = true;
+	int atkRoll = toprand(20);
+	if (atkRoll >= 10) {
+		int damage = toprand(splDie[spellType]);
+		damage = damage + getModifier(Intl);
+		Enemy.takeDamage (damage);
+		cout << "Your " << splNames[spellType] << " was a success!  Your enemy took " << damage << " damage.  They are now at " << Enemy.npcHP << " HP.\n";
+		if (Enemy.isDead == true) {
+			cout << "You killed your enemy.\n";
+			Enemy.set ("goblin", 13, 13, 13, 13, 13, 13, 6, 8, 4, 12, true, -1, 1, "scimitar", "light crossbow", "dagger", 2);
+			inCombat = false;
+			act ();
+		} else {
+			Enemy.dealDamage (toprand(3), false, false);
+		}
+	} else if (atkRoll == 1) {
+		HP -= 1;
+		cout << "Your concentration was broken, rendering your spellcast ineffective.  The loss of concentration physically injured you, causing you to take 1 damage.\n";
+		Enemy.dealDamage (toprand(3), true, false);
+		act ();
+	} else {
+		cout << "You forgot some essential part of your spell's casting process, so the cast was ineffective.\n";
+		Enemy.dealDamage (toprand(3), false, false);
+		act ();
+	}
 }
 void attack (int atkType, bool hasAdv, bool hasDis) {
 	inCombat = true;
@@ -420,6 +511,12 @@ void mover () {
 		cout << "You are in combat.";
 	act ();
 }
+void updtLvl () {
+	while (XP >= lvlXP[lvl+1]) {
+		XP -= lvlXP[lvl + 1];
+		lvl += 1;
+	}
+}
 void ACT () { // This function is here so act() can be called from within itself
 	act ();
 }
@@ -431,7 +528,7 @@ void act () {
 	string act;
 	cin >> act;
 	if (inCombat == false) {
-		if (act == "attack" || act == "1") {
+		/*if (act == "attack" || act == "1") {
 			// weapon chooser
 			int wep;
 			cout << "Which weapon will you use? Choices: ";
@@ -445,6 +542,49 @@ void act () {
 				cout << "silvered shortsword(1), warhammer(2), light crossbow(3) "; // Cleric loadout
 			cin >> wep;
 			attack (wep, true, false);
+		}*/
+		if (act == "attack" || act == "1") { // new & improved attack system
+			int atkCls;
+			int wep;
+			int spl;
+			cout << "Which class of attack do you want to perform?\n | 1 - Weapon | 2 - Spell |\n";
+			cin >> atkCls;
+			switch (atkCls) {
+				case 1:
+					cout << "You have chosen to use a weapon to attack.  Which weapon do you want to use? Choices:\n | Slot 1: " << invNames[wepID[1]] << " |\n | Slot 2: " << invNames[wepID[2]] << " |\n | Slot 3: " << invNames[wepID[3]] << "|\n";
+					cin >> wep;
+					if (wep == 1 && wepID[1] == -1) {
+						cout << "Slot 1 is currently empty.(This action has not cost you a turn)\n";
+						break;
+					} else if (wep == 2 && wepID[2] == -1) {
+						cout << "Slot 2 is currently empty.(This action has not cost you a turn)\n";
+						break;
+					} else if (wep == 3 && wepID[3] == -1) {
+						cout << "Slot 3 is currently empty.(This action has not cost you a turn)\n";
+						break;
+					} else {
+						attack(wep, false, false);
+					}
+					break;
+				case 2:
+					cout << "You have chosen to cast a spell.  Which one do you want to cast? Choices:\n | Slot 1: " << splNames[spellID[1]] << " |\n | Slot 2: " << splNames[spellID[2]] << " |\n | Slot 3: " << splNames[spellID[3]] << "|\n";
+					cin >> spl;
+					if (spl == 1 && spellID[1] == -1) {
+						cout << "Slot 1 is currently empty.(This action has not cost you a turn)\n";
+						break;
+					} else if (spl == 2 && spellID[2] == -1) {
+						cout << "Slot 2 is currently empty.(This action has not cost you a turn)\n";
+						break;
+					} else if (spl == 3 && spellID[3] == -1) {
+						cout << "Slot 3 is currently empty.(This action has not cost you a turn)\n";
+						break;
+					} else {
+						spell(spl);
+						break;
+					}
+					break;
+			}
+			ACT ();
 		}
 		else if (act == "move" || act == "2" || act == "travel") { // Travel
 			mover ();
@@ -468,7 +608,7 @@ void act () {
 			ACT ();
 		}
 		else if (act == "checkup" || act == "check" || act == "7") {
-			cout << "HP: " << HP << " maxHP: " << maxHP << endl;
+			cout << "HP: " << HP << " maxHP: " << maxHP << " Armor Class: " << AC << " Experience Points: " << XP << " XP Required for Next Level: " << lvlXP[lvl + 1] << " Level: " << lvl << endl;
 			int i = 1;
 			do {
 				if (!inv[i] == 0)
@@ -489,8 +629,10 @@ void act () {
 			ACT ();
 		}
 		else if (act == "drink" || act == "9") {
-			if (!inv[15] == 0) {
+			if (!inv[30] == 0) {
 				cout << "You drank five swallows of water from your canteen." << endl;
+			} else if (inv[15] != 0) {
+				cout << "Your canteen is empty." << endl;
 			} else {
 				cout << "You don't have a canteen." << endl;
 			}
@@ -778,7 +920,7 @@ void act () {
 			cout << "King Midas: 'You idiot!... whatever, here you go!'\n";
 			int i = 1;
 			do {
-				if (i != 27) {
+				if (i != 45) {
 					inv[27] = inv[27] + inv[i];
 					inv[i] = 0;
 				}
@@ -883,13 +1025,145 @@ void act () {
 			ACT();
 		}
 		// else if (act == "talents" || act == "15") {} Opens the talents menu, where you can view available talents, enabled talents, learn new talents, level up old ones, and more!
-		// else if (act == "loadout" || act == "16") {} Opens the loadout editor where weapons, talents, armor, and more can be managed easily.
+		else if (act == "loadout" || act == "16") { // Opens the loadout editor where weapons, talents, armor, and more can be managed easily.
+			cout << " | 1 - Edit Weapon Loadout |\n | 2 - Edit Armor |\n | 3 - Edit Magic Slots |\n";
+			cin >> tempint;
+			switch (tempint) {
+				case 1:
+					cout << "| Current Loadout: |\n | 1 - " << invNames[wepID[1]] << " |\n | 2 - " << invNames[wepID[2]] << " |\n | 3 - " << invNames[wepID[3]] << " |\n";
+					cout << "Enter numbers 1-3 to change slot, enter 4 to exit without editing slots.";
+					cin >> tempint;
+					switch (tempint) {
+						case 1:
+							cout << "Enter the item ID of a weapon in your inventory to change it, or enter -1 to cancel this operation.\n";
+							cin >> tempint;
+							if (tempint == -1) {
+								ACT ();
+							} else if (tempint <= 9) {
+								if (inv[tempint] >= 1) {
+									wepID[1] = tempint;
+									DamDie[1] = wepDie[tempint];
+									cout << "Weapon Slot 1 successfully switched to " << invNames[tempint] << "!\n";
+								}
+								cout << "That's not a weapon!\n";
+							}
+							break;
+						case 2:
+							cout << "Enter the item ID of a weapon in your inventory to change it, or enter -1 to cancel this operation.\n";
+							cin >> tempint;
+							if (tempint == -1) {
+								ACT ();
+							} else if (tempint <= 9) {
+								if (inv[tempint] >= 1) {
+									wepID[2] = tempint;
+									DamDie[2] = wepDie[tempint];
+									cout << "Weapon Slot 2 successfully switched to " << invNames[tempint] << "!\n";
+								}
+								cout << "That's not a weapon!\n";
+							}
+							break;
+						case 3:
+							cout << "Enter the item ID of a weapon in your inventory to change it, or enter -1 to cancel this operation.\n";
+							cin >> tempint;
+							if (tempint == -1) {
+								ACT ();
+							} else if (tempint <= 9) {
+								if (inv[tempint] >= 1) {
+									wepID[3] = tempint;
+									DamDie[3] = wepDie[tempint];
+									cout << "Weapon Slot 3 successfully switched to " << invNames[tempint] << "!\n";
+								}
+								cout << "That's not a weapon!\n";
+							}
+							break;
+						case 4:
+							break;
+					}
+					break;
+				case 2:
+					cout << "You are currently wearing " << invNames[armorType + 22] << " .\n | 1 - Light Armor |\n | 2 - Medium Armor |\n | 3 - Heavy Armor |\n | 4 - Exit |\n";
+					cin >> tempint;
+					switch (tempint) {
+						case 1:
+							if (inv[23] >= 1) {
+								AC = 1;
+								armorType = 1;
+								cout << "You have successfully equipped Light Armor.\n";
+							} else {
+								cout << "You don't have any Light Armor.\n";
+								break;
+							}
+							break;
+						case 2:
+							if (inv[24] >= 1) {
+								AC = 2;
+								armorType = 2;
+								cout << "You have successfully equipped Medium Armor.\n";
+							} else {
+								cout << "You don't have any Medium Armor.\n";
+								break;
+							}
+							break;
+						case 3:
+							if (inv[25] >= 1) {
+								AC = 3;
+								armorType = 3;
+								cout << "You have successfully equipped Heavy Armor.\n";
+							} else {
+								cout << "You don't have any Heavy Armor.\n";
+								break;
+							}
+							break;
+						case 4:
+							break;
+					}
+					break;
+				case 3:
+					cout << " | Current Loadout: |\n | Slot 1: " << splNames[spellID[1]] << " | Slot 2: " << splNames[spellID[2]] << " | Slot 3: " << splNames[spellID[3]] << " |\n";
+					cin >> tempint;
+					switch (tempint) {
+						case 1:
+							cout << "Enter the spell ID which you want to equip from the table in the /docs folder.  Entering -1 will cancel the operation.\n";
+							cin >> tempint;
+							if (tempint == -1) {
+								ACT ();
+							} else if (tempint <= 10) {
+								spellID[1] = tempint;
+								cout << "Spell Slot 1 has been successfully changed to " << splNames[tempint] << "!\n";
+							}
+							break;
+						case 2:
+							cout << "Enter the spell ID which you want to equip from the table in the /docs folder.  Entering -1 will cancel the operation.\n";
+							cin >> tempint;
+							if (tempint == -1) {
+								ACT ();
+							} else if (tempint <= 10) {
+								spellID[2] = tempint;
+								cout << "Spell Slot 2 has been successfully changed to " << splNames[tempint] << "!\n";
+							}
+							break;
+						case 3:
+							cout << "Enter the spell ID which you want to equip from the table in the /docs folder.  Entering -1 will cancel the operation.\n";
+							cin >> tempint;
+							if (tempint == -1) {
+								ACT ();
+							} else if (tempint <= 10) {
+								spellID[3] = tempint;
+								cout << "Spell Slot 3 has been successfully changed to " << splNames[tempint] << "!\n";
+							}
+							break;
+						case 4:
+							break;
+					}
+			}
+			ACT();
+		} 
 		else {
 			cout << "Unacceptable input.  Refer to the README for more information." << endl;
 			ACT ();
 		}
 	} else {
-		if (act == "attack" || act == "1") { // Soon to be changed to a system that uses the player's inventory to determine weapons
+		/*if (act == "attack" || act == "1") { // Soon to be changed to a system that uses the player's inventory to determine weapons
 			// weapon chooser
 			int wep;
 			cout << "Which weapon will you use? Choices: ";
@@ -903,6 +1177,49 @@ void act () {
 				cout << "silvered shortsword(1), warhammer(2), light crossbow(3) "; // Cleric loadout
 			cin >> wep;
 			attack (wep, true, false);
+		}*/
+		if (act == "attack" || act == "1") { // new & improved attack system
+			int atkCls;
+			int wep;
+			int spl;
+			cout << "Which class of attack do you want to perform?\n | 1 - Weapon | 2 - Spell |\n";
+			cin >> atkCls;
+			switch (atkCls) {
+				case 1:
+					cout << "You have chosen to use a weapon to attack.  Which weapon do you want to use? Choices:\n | Slot 1: " << invNames[wepID[1]] << " |\n | Slot 2: " << invNames[wepID[2]] << " |\n  | Slot 3: " << invNames[wepID[3]] << "|\n";
+					cin >> wep;
+					if (wep == 1 && wepID[1] == -1) {
+						cout << "Slot 1 is currently empty.(This action has not cost you a turn)\n";
+						break;
+					} else if (wep == 2 && wepID[2] == -1) {
+						cout << "Slot 2 is currently empty.(This action has not cost you a turn)\n";
+						break;
+					} else if (wep == 3 && wepID[3] == -1) {
+						cout << "Slot 3 is currently empty.(This action has not cost you a turn)\n";
+						break;
+					} else {
+						attack(wep, false, false);
+					}
+					break;
+				case 2:
+					cout << "You have chosen to cast a spell.  Which one do you want to cast? Choices:\n | Slot 1: " << splNames[spellID[1]] << " |\n | Slot 2: " << splNames[spellID[2]] << " |\n | Slot 3: " << splNames[spellID[3]] << "|\n";
+					cin >> spl;
+					if (spl == 1 && spellID[1] == -1) {
+						cout << "Slot 1 is currently empty.(This action has not cost you a turn)\n";
+						break;
+					} else if (spl == 2 && spellID[2] == -1) {
+						cout << "Slot 2 is currently empty.(This action has not cost you a turn)\n";
+						break;
+					} else if (spl == 3 && spellID[3] == -1) {
+						cout << "Slot 3 is currently empty.(This action has not cost you a turn)\n";
+						break;
+					} else {
+						spell(spl);
+						break;
+					}
+					break;
+			}
+			ACT ();
 		}
 		else if (act == "dodge" || act == "2") {
 			cout << "You dodged away from your enemy's blow, giving him a disadvantage." << endl;
@@ -947,12 +1264,19 @@ void act () {
 void setClass () {
 	switch (clas) {
 		case 1:
+			armorType = 3;
 			Str = 15;
 			Dex = 14;
 			Con = 14;
 			Intl = 11;
 			Wis = 12;
 			Cha = 10;
+			wepID[1] = 1;
+			wepID[2] = 5;
+			wepID[3] = 4;
+			spellID[1] = 20;
+			spellID[2] = 20;
+			spellID[3] = 20;
 			DamDie[1] = 8;
 			DamDie[2] = 4;
 			DamDie[3] = 8;
@@ -974,22 +1298,30 @@ void setClass () {
 			inv[15] = 1; // Canteen
 			inv[20] = 10; // Food, measured in days
 			inv[27] = 100; // Gold pieces
+			inv[25] = 1;
 			inv[28] = 1; // Backpack
 			break;
 		case 2:
+			armorType = 1;
 			Str = 14;
 			Dex = 15;
 			Con = 13;
 			Intl = 11;
 			Wis = 14;
 			Cha = 8;
+			wepID[1] = 2;
+			wepID[2] = 3;
+			wepID[3] = 6;
+			spellID[1] = 20;
+			spellID[2] = 20;
+			spellID[3] = 20;
 			DamDie[1] = 6;
 			DamDie[2] = 10;
 			DamDie[3] = 6;
 			HP = 9;
 			maxHP = 9;
 			cla = 2;
-			AC = 2;
+			AC = 1;
 			cout << "You are a rogue: a stealthy bandit skilled with the crossbow and wielding a shortsword.  You are equipped with a shortsword, a crossbow with 40 bolts, and a handaxe.  On your back you wear a thieve's pack, equipped with a crowbar, assorted knives, food, and a 50-foot rope." << endl;
 			ScoreAssoc[1] = Str;
 			ScoreAssoc[2] = Dex;
@@ -1004,6 +1336,7 @@ void setClass () {
 			inv[17] = 1;
 			inv[13] = 1;
 			inv[27] = 80;
+			inv[23] = 1;
 			inv[28] = 1;
 			break;
 		case 3:
@@ -1013,17 +1346,19 @@ void setClass () {
 			Intl = 15;
 			Wis = 13;
 			Cha = 8;
-			DamDie[1] = 12;
-			DamDie[2] = 4;
-			DamDie[3] = 6;
+			wepID[1] = 5;
+			spellID[1] = 1;
+			spellID[2] = 2;
+			spellID[3] = 3;
+			DamDie[1] = 4;
 			HP = 8;
 			maxHP = 8;
 			cla = 3;
 			AC = 1;
-			cout << "You are a wizard: a person shrouded in both mystery and the star-spangled cloak that covers your shoulders.  You can cast the magic missile and fireball spells.  You also carry a dagger.  On your emaciated shoulders lays the burden of a mage's sack, containing all the material elements needed to cast your spells." << endl;
-			ScoreAssoc[1] = Intl;
+			cout << "You are a wizard: a person shrouded in both mystery and the star-spangled cloak that covers your shoulders.  You can cast the magic missile, fireball, and burning hands spells.  You also carry a dagger.  On your emaciated shoulders lays the burden of a mage's sack, containing all the material elements needed to cast your spells." << endl;
+			ScoreAssoc[1] = Str;
 			ScoreAssoc[2] = Str;
-			ScoreAssoc[3] = Intl;
+			ScoreAssoc[3] = Str;
 			inv[5] = 1;
 			inv[28] = 1;
 			inv[27] = 120;
@@ -1032,12 +1367,19 @@ void setClass () {
 			inv[16] = 3;
 			break;
 		case 4:
+			armorType = 2;
 			Str = 14;
 			Dex = 12;
 			Con = 12;
 			Intl = 14;
 			Wis = 10;
 			Cha = 14;
+			wepID[1] = 2;
+			wepID[2] = 7;
+			wepID[3] = 4;
+			spellID[1] = 20;
+			spellID[2] = 20;
+			spellID[3] = 20;
 			DamDie[1] = 9;
 			DamDie[2] = 8;
 			DamDie[3] = 8;
@@ -1058,6 +1400,7 @@ void setClass () {
 			inv[14] = 1;
 			inv[10] = 20;
 			inv[15] = 1;
+			inv[24] = 1;
 			inv[27] = 75;
 			break;
 	}
@@ -1068,6 +1411,10 @@ int main () {
 	int init = rand() % 5;
 	setInvNames();
 	setMap();
+	setSpellDies();
+	setLvlInfo();
+	int XP = 0;
+	int lvl = 1;
 	switch (init) {
 		case 0:
 			cout << "save a kidnapped girl!" << endl;
