@@ -228,7 +228,7 @@ void NPC::takeDamage (int damage) {
 				cout << "You pick up 100 FlexTape from Phil Swift's earthly body as his soul returns to heaven.  You hear his voice telling you that FlexTape can be used to treat wounds instantly.\n";
 				XP+=200;
 			} else if (Name == "goblin") {
-				inv[9]+=1;
+				inv[9]+=1; // Also gives you equipment of killed creature
 				inv[24]+=1;
 				inv[27]+=25;
 				inv[4]+=1;
@@ -243,7 +243,7 @@ void NPC::takeDamage (int damage) {
 				inv[4]+=1;
 				XP+=50;
 			}
-			updtLvl();
+			updtLvl(); // Checks for XP leveling AFTER incrementing XP values
 		}
 		else {
 		isIncap = true; // If not, render it unconcious
