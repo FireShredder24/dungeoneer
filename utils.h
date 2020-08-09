@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string>
 #include <math.h>
+#include <ctime>
 
 using namespace std;
 
@@ -16,11 +17,19 @@ bool scanstik = true;
 unsigned short int day = 15, month = 6, year = 1456, hour = 12;
 
 namespace utils { // All functions defined within this namespace are called using utils::ID ();
+int toprand (int max) { // Generating a random number between 1 and max
+	time_t tmtime = time (0);
+	srand(tmtime);
+	int temp = rand() % max;
+	temp = temp + 1;
+	return temp;
+	delete &temp;
+}
 void scan () { // Random sentence generator
 	if (set1 == '\0'/*&& scanstik*/) { // If set1 doesn't have a value yet, randomize.  If it does, don't change it until you move!
-		set1 = rand() % 5; // BTW the don't change until move thing doesn't work
-		set2 = rand() % 5;
-		set3 = rand() % 5;
+		set1 = toprand(5); // BTW the don't change until move thing doesn't work
+		set2 = toprand(5);
+		set3 = toprand(5);
 	}
 	
 	switch (set1) {
@@ -106,12 +115,7 @@ void scan () { // Random sentence generator
 	scanstik = false;
 }
 
-int toprand (int max) { // Generating a random number between 1 and max
-	int temp = rand() % max;
-	temp = temp + 1;
-	return temp;
-	delete &temp;
-}
+
 
 int getModifier (int abScore) { // Converting an ability score into its appropriate modifier(taken directly from the "Ability Scores & Modifiers" table in the Player's Basic Rules)
 	switch (abScore) {
