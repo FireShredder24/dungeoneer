@@ -1,6 +1,6 @@
 // This code is protected by the MIT License.  See README.txt for more information.  If README.txt is not present, simply Google "MIT License".  Copyright 2018 John Nguyen.
 /* 
- ___               __   ___  __          ___  ___ ___
+ ___               __   ___  __          ___  ___  __
 |   \ |  | |\   | /  \ |    /  \ |\   | |    |    |  \
 |   | |  | | \  | | _  |--- |  | | \  | |--- |--- |--/
 |   | |  | |  \ | |  \ |    |  | |  \ | |    |    | \
@@ -960,27 +960,9 @@ void setClass () {
 }
 int main () {
 	cout << "Welcome to Dungeoneer!" << endl;
-	cout << "You are an adventurer embarking on a daring mission to... ";
-	int init = rand() % 5;
+	cout << "You are an adventurer embarking on a daring mission... or perhaps no mission at all.\n";
 	setInvNames();
 	setMap();
-	switch (init) {
-		case 0:
-			cout << "save a kidnapped girl!" << endl;
-			break;
-		case 1:
-			cout << "recover lost treasure!" << endl;
-			break;
-		case 2:
-			cout << "redeem yourself in society!" << endl;
-			break;
-		case 3:
-			cout << "stop a heathen horde from destroying your village!" << endl;
-			break;
-		case 4:
-			cout << "loot dungeons and overall be an idiot!" << endl;
-			break;
-	}
 	cout << "Which class will your adventurer be?  Choices: fighter(1), rogue(2), wizard(3), cleric(4)" << endl;
 	cin >> clas;
 	setClass ();

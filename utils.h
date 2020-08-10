@@ -23,7 +23,7 @@ int toprand (int max) { // Generating a random number between 1 and max
 	int temp = rand() % max;
 	temp = temp + 1;
 	return temp;
-	delete &temp;
+	delete &temp; delete &tmtime;
 }
 void scan () { // Random sentence generator
 	if (set1 == '\0'/*&& scanstik*/) { // If set1 doesn't have a value yet, randomize.  If it does, don't change it until you move!
